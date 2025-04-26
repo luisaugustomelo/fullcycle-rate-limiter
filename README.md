@@ -87,26 +87,15 @@ Como Rodar Localmente
 
 1. Subir o Redis
 
-Certifique-se de ter o Docker instalado. Rode o Redis com:
+Certifique-se de ter o Docker instalado. Rode o seguinte comando:
 
 ```
-docker run --name rate-limiter-redis -p 6379:6379 -d redis
+docker-compose up -d
 ```
-
-Ou, se preferir, crie um docker-compose.yml (podemos providenciar).
 
 2. Rodar os Testes
 
 Este projeto possui testes automatizados para validar todo o comportamento:
-
-Crie o arquivo Makefile (na raiz do projeto) com o seguinte conteúdo:
-
-```
-.PHONY: test
-
-test:
-	go test ./internal/middleware -v
-```
 
 Para rodar os testes:
 
@@ -125,15 +114,3 @@ Se tudo estiver correto, o resultado será:
 - Todas as validações de rate limit passando
 
 - Logs indicando 200 para requisições válidas e 429 para bloqueios
-
-## Conclusão
-
-Este Rate Limiter foi desenvolvido para ser robusto, modular e preparado para cenários de alta carga e requisitos de configuração flexíveis. O uso de Redis garante eficiência na persistência dos dados de rate limit.
-
-Se quiser expandir, é possível facilmente adicionar:
-
-- Monitoramento de IPs/token bloqueados
-
-- Configurações dinâmicas
-
-- Trocar Redis por outro Store (graças à strategy StoreStrategy)
